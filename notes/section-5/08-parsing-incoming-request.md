@@ -5,7 +5,8 @@ Body-parser is the Node.js body-parsing middleware. It is responsible for parsin
 ### What is Body-parser?
 
 body-parser is essential for handling incoming data in a variety of formats, such as JSON, URL-encoded form data, and raw or text data. It transforms this data into a readable format under req.body for easier processing in your application.
-Features
+
+Features:
 
 - Handles different types of request payloads, including JSON, URL-encoded, raw, and text data.
 - Simplifies the process of accessing request data, making it readily available under req.body.
@@ -19,5 +20,7 @@ npm install --save body-parser
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 ```
+
+The extended option allows to choose between parsing the URL-encoded data with the querystring library (when false) or the qs library (when true).
 
 [Next: Limiting middleware](./09-limiting-middleware.md)
