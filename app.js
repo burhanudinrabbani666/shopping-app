@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path");
 
 // import Routes
 const adminRoutes = require("./routes/admin");
@@ -16,7 +17,7 @@ app.use(shopRoutes);
 
 // simply when the user entering path which not register in server this middleware catch that as a last option.
 app.use("/", (req, res, next) => {
-  res.status(400).send("<h1>Page Not Found</h1>");
+  res.status(400).sendFile(path.join(__dirname, "views", "404.html"));
 });
 
 // Creating Server
