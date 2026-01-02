@@ -8,8 +8,8 @@ const shopRoutes = require("./routes/shop");
 
 const app = express();
 
-// Parser for handling submissions
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false })); // Parser for handling submissions
+app.use(express.static(path.join(__dirname, "public"))); // for serving css staticly
 
 // Middleware
 app.use("/admin", adminRoutes);
