@@ -1,27 +1,18 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+
+// import Routes
+const adminRoutes = require("./routes/admin");
+const shopRoutes = require("./routes/shop");
+
 const app = express();
 
 // Parser for handling submissions
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Middleware
-app.use("/add-product", (req, res, next) => {
-  res.send(
-    `<form action="/product" method="post"><input type="text" name="title"><button type="submit">Add Product</button></form>`
-  );
-});
-
-app.use("/product", (req, res, next) => {
-  // Extracting data input
-  console.log(req.body);
-
-  res.redirect("/");
-});
-
-app.use("/", (req, res, next) => {
-  res.send(`<h1>Hello from express.js</h1>`);
-});
+app.use(adminRoutes);
+app.use(shopRoutes);
 
 // Creating Server
 app.listen(3000);
