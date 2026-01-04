@@ -1,6 +1,6 @@
 ## Sharing Data Accross Request
 
-Implementing data storage in regular variables first. A side effect is that the data can be accessed by other users on the same server, which can be dangerous if the data is private.
+create array variable for storing submissions. A side effect is that the data can be accessed by other users on the same server, which can be dangerous if the data is private.
 
 ```js
 // admin.js
