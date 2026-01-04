@@ -4,8 +4,6 @@
 
 ### EJS
 
-syntax
-
     <p><%= name %></p>
 
 Using Normal HTML and plain JavaScript in your templates

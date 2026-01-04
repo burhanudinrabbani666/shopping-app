@@ -8,6 +8,10 @@ const shopRoutes = require("./routes/shop");
 
 const app = express();
 
+// Set global value: template engine
+app.set("view engine", "pug");
+app.set("views", "views");
+
 app.use(bodyParser.urlencoded({ extended: false })); // Parser for handling submissions
 app.use(express.static(path.join(__dirname, "public"))); // for serving css staticly
 
@@ -17,7 +21,9 @@ app.use(shopRoutes);
 
 // simply when the user entering path which not register in server this middleware catch that as a last option.
 app.use("/", (req, res, next) => {
-  res.status(400).sendFile(path.join(__dirname, "views", "404.html"));
+  res.status(400).render("404", {
+    docTitle: "error - Shop",
+  });
 });
 
 // Creating Server

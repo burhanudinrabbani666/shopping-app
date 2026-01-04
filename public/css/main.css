@@ -45,6 +45,9 @@ main {
 .main-header__item a {
   text-decoration: none;
   color: #fff;
+
+  padding: 4px 8px;
+  border-radius: 4px;
 }
 
 .main-header__item a:hover,
@@ -102,6 +105,7 @@ main {
   color: #fff;
   border-radius: 3px;
   cursor: pointer;
+  padding: 4px 8px;
 }
 
 .btn:hover,
