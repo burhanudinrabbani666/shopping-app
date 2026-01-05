@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
-const expressHbs = require("express-handlebars");
 
 // import Routes
 const adminData = require("./routes/admin");
@@ -10,8 +9,7 @@ const shopRoutes = require("./routes/shop");
 const app = express();
 
 // Set global value: template engine
-app.engine("handlebars", expressHbs()); // handlebars @3
-app.set("view engine", "handlebars");
+app.set("view engine", "ejs");
 app.set("views", "views");
 
 app.use(bodyParser.urlencoded({ extended: false })); // Parser for handling submissions
@@ -25,6 +23,7 @@ app.use(shopRoutes);
 app.use("/", (req, res, next) => {
   res.status(400).render("404", {
     pageTitle: "Page not found",
+    path: "",
   });
 });
 
