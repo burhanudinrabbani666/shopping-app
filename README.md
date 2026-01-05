@@ -17,11 +17,14 @@ This repository contains my project and learning notes from a Udemy course on No
 
 ## Topic
 
-| Section | Title                                         | Status | Notes |
-| ------- | --------------------------------------------- | ------ | ----- |
-| 5       | [Working with Express.js](./notes/section-5/) | ✍️     |       |
-| 6       | [](./notes)                                   | ⏳     |       |
-| 7       | [](./notes)                                   | ⏳     |       |
-| 9       | [](./notes)                                   | ⏳     |       |
+| Section | Title                                                 | Status | Notes   |
+| ------- | ----------------------------------------------------- | ------ | ------- |
+| 5       | [Working with Express.js](./notes/section-5/)         | ✅     |         |
+| 6       | [Template Engine](./notes/section-6/)                 | ✅     | use EJS |
+| 7       | [The model view controller (MVC)](./notes/section-7/) | ✍️     |         |
+| 9       | [](./notes)                                           | ⏳     |         |
 
 ### Things I learned
+
+- Express js, middleware, routing.
+- EJS, dynamic and reusable html.

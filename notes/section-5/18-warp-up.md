@@ -18,6 +18,6 @@
 
 ## Server files
 
-your not limited to serving dummy text as a respons
-you can sendFile() to your users --e.g HTML files
-is a request is directly made for a file (e.g. a .css file is requested). you can enable static serving for such file via express.static()
+- your not limited to serving dummy text as a respons
+- you can sendFile() to your users --e.g HTML files
+- is a request is directly made for a file (e.g. a .css file is requested). you can enable static serving for such file via express.static()
