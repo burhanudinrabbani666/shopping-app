@@ -1,7 +1,17 @@
+/* 
+#6bb556
+#4f9d4d
+#ffc96b
+*/
+
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
 
 *:focus {
   outline: 2px solid #6bb556;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -21,12 +31,14 @@ main {
   width: 100%;
   height: 3.5rem;
   background-color: #4f9d4d;
-  padding: 0 1.5rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
 }
 
 .main-header__nav {
   height: 100%;
-  display: flex;
+  display: none;
   align-items: center;
 }
 
@@ -56,6 +68,83 @@ main {
   color: #ffc96b;
 }
 
+.mobile-nav {
+  width: 30rem;
+  height: 100vh;
+  max-width: 90%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: white;
+  z-index: 10;
+  padding: 2rem 1rem 1rem 2rem;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out;
+}
+
+.mobile-nav.open {
+  transform: translateX(0);
+}
+
+.mobile-nav__item-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav__item {
+  margin: 1rem;
+  padding: 0;
+}
+
+.mobile-nav__item a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.5rem;
+  padding: 0.5rem 2rem;
+}
+
+.mobile-nav__item a:active,
+.mobile-nav__item a:hover,
+.mobile-nav__item a.active {
+  background: #6bb556;
+  color: white;
+  border-radius: 3px;
+}
+
+#side-menu-toggle {
+  border: 1px solid white;
+  font: inherit;
+  padding: 0.5rem;
+  display: block;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+#side-menu-toggle:focus {
+  outline: none;
+}
+
+#side-menu-toggle:active,
+#side-menu-toggle:hover {
+  color: #ffeb3b;
+  border-color: #ffeb3b;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+  display: none;
+}
+
 .grid {
   display: flex;
   flex-wrap: wrap;
@@ -72,6 +161,12 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.card__header,
+.card__content,
+.card__actions {
+  padding: 0 1rem;
 }
 
 .card__header h1,
@@ -95,23 +190,27 @@ main {
 }
 
 .card__actions {
-  padding: 1rem 0;
+  padding: 1rem;
+  display: flex;
+  gap: 0.5rem;
 }
 
-.card__header,
-.card__content,
-.card__actions {
+.card__actions button,
+.card__actions a {
+  margin: 0 0.25rem;
   padding-left: 20px;
   padding-right: 20px;
 }
 
 .btn {
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  text-decoration: none;
   font: inherit;
   font-weight: 600;
   border: none;
-  background: #6bb556;
-
   color: #fff;
+  background: #6bb556;
   border-radius: 7px;
   cursor: pointer;
   padding: 8px 12px;
@@ -119,6 +218,16 @@ main {
 
 .btn:hover,
 .btn:active {
-  color: white;
   background-color: #4f9d4d;
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .main-header__nav {
+    display: flex;
+  }
+
+  #side-menu-toggle {
+    display: none;
+  }
 }

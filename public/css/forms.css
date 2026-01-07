@@ -12,18 +12,17 @@
   display: block;
   width: 100%;
   margin-bottom: 0.25rem;
+  border-radius: 7px;
+  padding: 8px 12px;
 }
 
 .form-control input,
 .form-control textarea {
-  border: 0.5px solid #a1a1a1;
+  border: 1px solid #b9b9b9;
   font: inherit;
-  border-radius: 10px;
-
-  padding: 8px 8px;
 }
 
 .form-control input:focus,
 .form-control textarea:focus {
-  outline: 0.5px solid #4f9d4d;
+  outline: 0.5px solid #6bb556;
 }
