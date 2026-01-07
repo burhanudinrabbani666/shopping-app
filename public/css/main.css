@@ -122,16 +122,11 @@ main {
   background: transparent;
   color: white;
   cursor: pointer;
+  border-radius: 4px;
 }
 
 #side-menu-toggle:focus {
   outline: none;
-}
-
-#side-menu-toggle:active,
-#side-menu-toggle:hover {
-  color: #ffeb3b;
-  border-color: #ffeb3b;
 }
 
 .backdrop {
