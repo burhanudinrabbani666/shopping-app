@@ -1,3 +1,4 @@
+const { deepStrictEqual } = require("assert");
 const fs = require("fs");
 const path = require("path");
 
@@ -19,8 +20,11 @@ const getProductFromFile = (callBack) => {
 };
 
 module.exports = class Product {
-  constructor(title) {
+  constructor(title, imageUrl, description, price) {
     this.title = title;
+    this.imageUrl = imageUrl;
+    this.description = description;
+    this.price = price;
   }
 
   _save() {
