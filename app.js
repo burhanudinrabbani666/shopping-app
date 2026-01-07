@@ -5,6 +5,7 @@ const path = require("path");
 // import Routes
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
+const { getErrorMessage } = require("./controllers/404");
 
 const app = express();
 
@@ -21,12 +22,7 @@ app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 
 // simply when the user entering path which not register in server this middleware catch that as a last option.
-app.use("/", (req, res, next) => {
-  res.status(400).render("404", {
-    pageTitle: "Page not found",
-    path: "",
-  });
-});
+app.use("/", getErrorMessage);
 
 // Creating Server
 app.listen(3001);
