@@ -12,23 +12,19 @@
         <% for(let product of prods) { %>
         <article class="card product-item">
           <div class="card__image">
-            <img
-              src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="A Book"
-            />
+            <img src="<%= product.imageUrl %>" alt="A Book" />
           </div>
           <header class="card__header">
             <h1 class="product__title"><%= product.title %></h1>
-            <h2 class="product__price">$19.99</h2>
+            <h2 class="product__price">$<%= product.price %></h2>
           </header>
           <div class="card__content">
-            <p class="product__description">
-              A very interesting book about so many even more interesting
-              things!
-            </p>
+            <p class="product__description"><%= product.description %></p>
           </div>
           <div class="card__actions">
-            <button class="btn">Add to Cart</button>
+            <form action="/add-to-cart" method="post">
+              <button class="btn">Add to Cart</button>
+            </form>
           </div>
         </article>
         <% } %>

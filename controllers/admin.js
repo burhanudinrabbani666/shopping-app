@@ -24,8 +24,11 @@ exports.postAddProduct = (req, res, next) => {
 };
 
 exports.getProduct = (req, res, next) => {
-  res.render("admin/products", {
-    pageTitle: "Products - Shop",
-    path: "/admin/products",
+  Product._fetchAll((products) => {
+    res.render("admin/products", {
+      prods: products,
+      pageTitle: "Admin Product- Shop",
+      path: "/admin/products",
+    });
   });
 };

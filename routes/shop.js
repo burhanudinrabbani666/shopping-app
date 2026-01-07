@@ -6,11 +6,13 @@ const {
   getCart,
   getIndex,
   getCheckOut,
+  getOrders,
 } = require("../controllers/shop");
 
 router.get("/", getIndex);
 router.get("/products", getProducts);
 router.get("/cart", getCart);
 router.get("/checkout", getCheckOut);
+router.get("/orders", getOrders);
 
 module.exports = router;
