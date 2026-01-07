@@ -1,7 +1,8 @@
 const Product = require("../models/product");
 
+// Admin
 exports.getAddProduct = (req, res, next) => {
-  res.render("add-product", {
+  res.render("admin/add-product", {
     pageTitle: "Add product - Shop",
     path: "/admin/add-product",
     formCss: true,
@@ -17,15 +18,9 @@ exports.postAddProduct = (req, res, next) => {
   res.redirect("/");
 };
 
-exports.getProducts = (req, res, next) => {
-  Product._fetchAll((products) => {
-    res.render("shop", {
-      prods: products,
-      pageTitle: "Shop",
-      path: "/",
-      hasProduct: products.length > 0,
-      activeShop: true,
-      productsCSS: true,
-    });
+exports.getProduct = (req, res, next) => {
+  res.render("admin/products", {
+    pageTitle: "Products - Shop",
+    path: "/admin/products",
   });
 };

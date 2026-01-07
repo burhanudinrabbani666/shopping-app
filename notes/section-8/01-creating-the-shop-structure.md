@@ -1,8 +1,8 @@
 ## Creating The Shop Structure
 
-Menambahkan file baru untuk page yang lainnya
+add new file for new page
 
-list file baru:
+list of new page:
 
 - admin:
 

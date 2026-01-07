@@ -1,6 +1,6 @@
 ## Refactoring
 
-disini kita bahkan merefactor Ffngsi dari class supyaa lebih jelas
+Here we even refactor the functions of the class to make it clearer.
 
 ```js
 const pathData = path.join(
