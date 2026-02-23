@@ -1,10 +1,3 @@
-# Adding cart model
-
-1. Creating modal for Cart
-
-```js
-// /modal/cart.js
-
 const fs = require("fs");
 const path = require("path");
 
@@ -46,21 +39,7 @@ module.exports = class Cart {
         console.log(error);
       });
     });
+
+    // Add new product
   }
 };
-```
-
-implent function in route
-
-```js
-exports.postCart = (req, res, next) => {
-  const productId = req.body.productId;
-  Product.findById(productId, (product) => {
-    Cart.addProduct(productId, product.price);
-  });
-
-  res.redirect("/cart");
-};
-```
-
-Next: [Using query params](./07-using-query-params.md)
