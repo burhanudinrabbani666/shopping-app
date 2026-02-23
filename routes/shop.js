@@ -7,12 +7,19 @@ const {
   getIndex,
   getCheckOut,
   getOrders,
+  getProduct,
 } = require("../controllers/shop");
 
 router.get("/", getIndex);
+
 router.get("/products", getProducts);
+
+router.get("/products/:productId", getProduct);
+
 router.get("/cart", getCart);
+
 router.get("/checkout", getCheckOut);
+
 router.get("/orders", getOrders);
 
 module.exports = router;
