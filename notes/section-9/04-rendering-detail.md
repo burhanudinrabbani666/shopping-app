@@ -18,4 +18,25 @@ exports.getProduct = (req, res, next) => {
 };
 ```
 
+```html
+<main class="centered">
+  <h1><%= product.title %></h1>
+  <hr />
+  <div class="">
+    <img
+      src="<%= product.imageUrl %>"
+      alt="<%= product.title %>"
+      class="image-detail"
+    />
+  </div>
+
+  <h2><%= product.price %></h2>
+  <p><%= product.description %></p>
+
+  <form action="/cart" method="post">
+    <button class="btn" type="submit">Add to cart</button>
+  </form>
+</main>
+```
+
 [Next: Passing deta with post](./05-passing-data-with-post.md)
