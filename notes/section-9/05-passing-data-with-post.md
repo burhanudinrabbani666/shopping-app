@@ -11,23 +11,21 @@ added a new button that we can render on any page !! cool
 </form>
 ```
 
-on the page that contains the button. must enter data via the second argument
+on the page that contains the button. must enter data via the second argument. only doing this if the include inside for lop
 
 ```html
 <div><%- include('../includes/add-to-cart', {product: product}) %></div>
 ```
-
-<hr>
 
 we also add post method in our shop routes file
 
 ```js
 // routes/ admin.js
 
-router.post("/cart", shopController.postCart);
+router.post("/cart", postCart);
 ```
 
-and the function.
+and the function. still just for checking
 
 ```js
 exports.postCart = (req, res, next) => {
@@ -37,3 +35,5 @@ exports.postCart = (req, res, next) => {
   res.redirect("/cart");
 };
 ```
+
+Next: [Adding cart model](./06-adding-cart-model.md)
