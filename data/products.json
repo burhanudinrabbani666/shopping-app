@@ -1,9 +1,1 @@
-[
-  {
-    "id": "12345",
-    "title": "Book",
-    "imageUrl": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "description": "This is Awesome book!!",
-    "price": "19.99"
-  }
-]
+[{"id":"12345","title":"Book","imageUrl":"https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","description":"This is Awesome book!!","price":"19.99"},{"title":"Book 1","imageUrl":"https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1650680683i/51893.jpg","description":"Very nice book","price":"19.99","id":"0.7212615040274237"}]

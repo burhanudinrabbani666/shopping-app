@@ -5,7 +5,7 @@ const path = require("path");
 const pathFile = path.join(
   path.dirname(require.main.filename),
   "data",
-  "products.json"
+  "products.json",
 );
 
 const getProductFromFile = (callBack) => {
@@ -40,5 +40,13 @@ module.exports = class Product {
 
   static _fetchAll(callBack) {
     getProductFromFile(callBack);
+  }
+
+  static findById(id, callback) {
+    getProductFromFile((products) => {
+      const product = products.find((product) => product.id === id);
+
+      callback(product);
+    });
   }
 };
