@@ -1,4 +1,3 @@
-const { deepStrictEqual } = require("assert");
 const fs = require("fs");
 const path = require("path");
 
@@ -28,7 +27,7 @@ module.exports = class Product {
   }
 
   _save() {
-    this.id = Math.abs(Math.random().toString());
+    this.id = Math.trunc(Math.random().toString());
 
     getProductFromFile((products) => {
       products.push(this);
