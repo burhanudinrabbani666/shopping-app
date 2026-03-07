@@ -1,6 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 
+const Cart = require("./cart.js");
+
 const pathFile = path.join(
   path.dirname(require.main.filename),
   "data",
@@ -38,14 +40,18 @@ module.exports = class Product {
         updatedProducts[existingProductIndex] = this;
 
         fs.writeFile(pathFile, JSON.stringify(updatedProducts), (error) => {
-          console.log(error);
+          if (error) {
+            console.log(error);
+          }
         });
       } else {
         //
         this.id = Math.trunc(Math.random().toString());
         products.push(this);
         fs.writeFile(pathFile, JSON.stringify(products), (error) => {
-          console.log(error);
+          if (error) {
+            console.log(error);
+          }
         });
       }
     });
@@ -62,4 +68,6 @@ module.exports = class Product {
       callback(product);
     });
   }
+
+  static deleteProductById(id) {}
 };

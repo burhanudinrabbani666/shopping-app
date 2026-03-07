@@ -1,6 +1,18 @@
+const fs = require("fs");
+const path = require("path");
+
 const Product = require("../models/product");
 
-// Admin
+const pathFile = path.join(
+  path.dirname(require.main.filename),
+  "data",
+  "products.json",
+);
+
+//------------------------------------------//
+//            Get Methode                   //
+//------------------------------------------//
+
 exports.getAddProduct = (req, res, next) => {
   res.render("admin/edit-product", {
     pageTitle: "Add product - Shop",
@@ -10,18 +22,6 @@ exports.getAddProduct = (req, res, next) => {
     activeAddProduct: true,
     editing: false,
   });
-};
-
-exports.postAddProduct = (req, res, next) => {
-  const title = req.body.title;
-  const imageUrl = req.body.imageUrl;
-  const price = req.body.price;
-  const description = req.body.description;
-
-  const product = new Product(null, title, imageUrl, description, price);
-  product._save();
-
-  res.redirect("/");
 };
 
 exports.getEditProduct = (req, res, next) => {
@@ -46,12 +46,41 @@ exports.getEditProduct = (req, res, next) => {
   });
 };
 
+exports.getProduct = (req, res, next) => {
+  Product._fetchAll((products) => {
+    res.render("admin/products", {
+      prods: products,
+      pageTitle: "Admin Product- Shop",
+      path: "/admin/products",
+    });
+  });
+};
+
+//------------------------------------------//
+//            Post Methode                  //
+//------------------------------------------//
+
+exports.postAddProduct = (req, res, next) => {
+  const title = req.body.title;
+  const imageUrl = req.body.imageUrl;
+  const price = req.body.price;
+  const description = req.body.description;
+
+  // ID set null for creating new ID in save method
+  const product = new Product(null, title, imageUrl, description, price);
+  product._save();
+
+  res.redirect("/");
+};
+
 exports.postEditProduct = (req, res, next) => {
   const id = req.body.productId;
   const updatedTitle = req.body.title;
   const updatedPrice = req.body.price;
   const updatedImageUrl = req.body.imageUrl;
   const updatedDesc = req.body.description;
+
+  // Create new update product object
   const updatedProduct = new Product(
     id,
     updatedTitle,
@@ -61,15 +90,21 @@ exports.postEditProduct = (req, res, next) => {
   );
 
   updatedProduct._save();
+
   res.redirect("/admin/products");
 };
 
-exports.getProduct = (req, res, next) => {
+exports.postDeleteProduct = (req, res, next) => {
+  const id = req.body.productId;
+
   Product._fetchAll((products) => {
-    res.render("admin/products", {
-      prods: products,
-      pageTitle: "Admin Product- Shop",
-      path: "/admin/products",
+    const newProducts = products.filter((product) => product.id !== id);
+    fs.writeFile(pathFile, JSON.stringify(newProducts), (error) => {
+      if (error) {
+        console.log(error);
+      }
     });
   });
+
+  res.redirect("/admin/products");
 };

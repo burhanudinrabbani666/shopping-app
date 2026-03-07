@@ -5,7 +5,7 @@
 }
 
 .product-item {
-  width: 20rem;
+  width: 19rem;
   max-width: 95%;
 }
 
@@ -15,6 +15,7 @@
 }
 
 .product__price {
+  font-size: 1rem;
   text-align: center;
   color: #4d4d4d;
 }
