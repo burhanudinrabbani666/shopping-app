@@ -168,6 +168,7 @@ img {
 }
 .card__header {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
 }
@@ -183,7 +184,12 @@ img {
 .card__content h1,
 .card__content h2,
 .card__content p {
-  margin: 0;
+  margin: 1px;
+}
+
+.card__content {
+  display: flex;
+  justify-content: center;
 }
 
 .card__image {
@@ -200,21 +206,23 @@ img {
 }
 
 .card__actions {
-  padding: 1rem;
+  padding: 1rem 0;
   display: flex;
-  gap: 1rem;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
 }
 
 .card__actions button,
 .card__actions a {
   margin: 0 0.25rem;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .btn {
   display: inline-block;
-  padding: 4px 6px;
+  padding: 2px;
   text-decoration: none;
   font: inherit;
   font-weight: 600;
