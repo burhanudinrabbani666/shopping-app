@@ -9,7 +9,12 @@ const {
   getOrders,
   getProduct,
   postCart,
+  postCartDeleteProduct,
 } = require("../controllers/shop");
+
+//-----------------------------------//
+//          Get Methode              //
+//-----------------------------------//
 
 router.get("/", getIndex);
 
@@ -24,5 +29,11 @@ router.post("/cart", postCart);
 router.get("/checkout", getCheckOut);
 
 router.get("/orders", getOrders);
+
+//-----------------------------------//
+//          Post Methode             //
+//-----------------------------------//
+
+router.post("/cart-delete-item", postCartDeleteProduct);
 
 module.exports = router;
