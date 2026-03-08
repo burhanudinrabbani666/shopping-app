@@ -97,14 +97,7 @@ exports.postEditProduct = (req, res, next) => {
 exports.postDeleteProduct = (req, res, next) => {
   const id = req.body.productId;
 
-  Product._fetchAll((products) => {
-    const newProducts = products.filter((product) => product.id !== id);
-    fs.writeFile(pathFile, JSON.stringify(newProducts), (error) => {
-      if (error) {
-        console.log(error);
-      }
-    });
-  });
+  Product.deleteProductById(id);
 
   res.redirect("/admin/products");
 };

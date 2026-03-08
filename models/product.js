@@ -26,7 +26,7 @@ module.exports = class Product {
     this.title = title;
     this.imageUrl = imageUrl;
     this.description = description;
-    this.price = price;
+    this.price = Number(price);
   }
 
   _save() {
@@ -46,7 +46,7 @@ module.exports = class Product {
         });
       } else {
         //
-        this.id = Math.trunc(Math.random().toString());
+        this.id = (Math.random() * 999999).toFixed().toString();
         products.push(this);
         fs.writeFile(pathFile, JSON.stringify(products), (error) => {
           if (error) {
@@ -69,5 +69,16 @@ module.exports = class Product {
     });
   }
 
-  static deleteProductById(id) {}
+  static deleteProductById(id) {
+    getProductFromFile((products) => {
+      const product = products.find((product) => product.id === id);
+      const updatedProducts = products.filter((product) => product.id !== id);
+
+      fs.writeFile(pathFile, JSON.stringify(updatedProducts), (error) => {
+        if (!error) {
+          Cart.deleteProductById(id, product.price);
+        }
+      });
+    });
+  }
 };
