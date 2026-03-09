@@ -4,15 +4,15 @@ const path = require("path");
 const {
   getAddProduct,
   postAddProduct,
-  getProduct,
   getEditProduct,
   postEditProduct,
   postDeleteProduct,
+  getProducts,
 } = require("../controllers/admin");
 
 // /admin => GET
 router.get("/add-product", getAddProduct);
-router.get("/products", getProduct);
+router.get("/products", getProducts);
 router.get("/edit-product/:productId", getEditProduct);
 
 // /admin => POST

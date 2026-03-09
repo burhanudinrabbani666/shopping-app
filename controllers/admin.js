@@ -1,13 +1,4 @@
-const fs = require("fs");
-const path = require("path");
-
 const Product = require("../models/product");
-
-const pathFile = path.join(
-  path.dirname(require.main.filename),
-  "data",
-  "products.json",
-);
 
 //------------------------------------------//
 //            Get Methode                   //
@@ -46,14 +37,16 @@ exports.getEditProduct = (req, res, next) => {
   });
 };
 
-exports.getProduct = (req, res, next) => {
-  Product._fetchAll((products) => {
-    res.render("admin/products", {
-      prods: products,
-      pageTitle: "Admin Product- Shop",
-      path: "/admin/products",
-    });
-  });
+exports.getProducts = (req, res, next) => {
+  Product.findAll()
+    .then((products) => {
+      res.render("admin/products", {
+        prods: products,
+        pageTitle: "Admin Product- Shop",
+        path: "/admin/products",
+      });
+    })
+    .catch((error) => console.log(error));
 };
 
 //------------------------------------------//
@@ -66,12 +59,15 @@ exports.postAddProduct = (req, res, next) => {
   const price = req.body.price;
   const description = req.body.description;
 
-  // ID set null for creating new ID in save method
-  const product = new Product(null, title, imageUrl, description, price);
-  product
-    .save()
-    .then(() => {
-      res.redirect("/");
+  Product.create({
+    title,
+    price,
+    imageUrl,
+    description,
+  })
+    .then((result) => {
+      console.log(`Succesfully add Product: ${title}`);
+      res.redirect("/admin/add-product");
     })
     .catch((error) => console.log(error));
 };
