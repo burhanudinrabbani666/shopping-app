@@ -21,6 +21,7 @@ const getProductFromFile = (callBack) => {
 };
 
 module.exports = class Product {
+  // Object
   constructor(id, title, imageUrl, description, price) {
     this.id = id;
     this.title = title;
@@ -29,6 +30,7 @@ module.exports = class Product {
     this.price = Number(price);
   }
 
+  // Save Object to product.json
   _save() {
     getProductFromFile((products) => {
       if (this.id) {
@@ -57,10 +59,12 @@ module.exports = class Product {
     });
   }
 
+  // Get all Project from product.json
   static _fetchAll(callBack) {
     getProductFromFile(callBack);
   }
 
+  // Find Product from product.json and return product in callback;
   static findById(id, callback) {
     getProductFromFile((products) => {
       const product = products.find((product) => product.id === id);
@@ -69,6 +73,7 @@ module.exports = class Product {
     });
   }
 
+  // Delete Product from product.json and cart.json
   static deleteProductById(id) {
     getProductFromFile((products) => {
       const product = products.find((product) => product.id === id);
@@ -76,7 +81,7 @@ module.exports = class Product {
 
       fs.writeFile(pathFile, JSON.stringify(updatedProducts), (error) => {
         if (!error) {
-          Cart.deleteProductById(id, product.price);
+          Cart.deleteProductById(id, product.price); // Crat Class
         }
       });
     });

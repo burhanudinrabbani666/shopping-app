@@ -63,7 +63,10 @@ module.exports = class Cart {
         updatedCart.totalPrice - productPrice * productQty;
 
       fs.writeFile(pathFile, JSON.stringify(updatedCart), (error) => {
-        console.log(error);
+        if (error) {
+          console.log(error);
+          return;
+        }
       });
     });
   }
