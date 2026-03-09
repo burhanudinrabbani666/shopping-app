@@ -27,7 +27,9 @@ module.exports = class Product {
   }
 
   // Find Product from database
-  static findById(id, callback) {}
+  static findById(id) {
+    return db.execute("SELECT * FROM products WHERE products.id = ?", [id]);
+  }
 
   // Delete Product from database
   static deleteProductById(id) {}
