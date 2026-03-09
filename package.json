@@ -24,7 +24,8 @@
     "express": "^5.2.1",
     "express-handlebars": "3.0",
     "mysql2": "^3.19.0",
-    "pug": "^3.0.3"
+    "pug": "^3.0.3",
+    "sequelize": "^6.37.8"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"
