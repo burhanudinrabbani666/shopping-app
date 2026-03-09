@@ -14,10 +14,15 @@ module.exports = class Product {
   }
 
   // Save Object to database
-  _save() {}
+  save() {
+    return db.execute(
+      "INSERT INTO products (title, price, imageUrl, description) VALUES (?, ?, ?, ?)",
+      [this.title, this.price, this.imageUrl, this.description],
+    );
+  }
 
   // Get all Project from database
-  static _fetchAll() {
+  static fetchAll() {
     return db.execute("SELECT * FROM products");
   }
 

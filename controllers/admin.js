@@ -68,9 +68,12 @@ exports.postAddProduct = (req, res, next) => {
 
   // ID set null for creating new ID in save method
   const product = new Product(null, title, imageUrl, description, price);
-  product._save();
-
-  res.redirect("/");
+  product
+    .save()
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch((error) => console.log(error));
 };
 
 exports.postEditProduct = (req, res, next) => {
