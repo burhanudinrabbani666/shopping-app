@@ -6,13 +6,15 @@ const Cart = require("../models/cart");
 //-----------------------------------//
 
 exports.getProducts = (req, res, next) => {
-  Product._fetchAll((products) => {
-    res.render("shop/product-list", {
-      prods: products,
-      pageTitle: "Products - Shop",
-      path: "/products",
-    });
-  });
+  Product._fetchAll()
+    .then(([rows, fieldData]) => {
+      res.render("shop/product-list", {
+        prods: rows,
+        pageTitle: "Products - Shop",
+        path: "/products",
+      });
+    })
+    .catch((error) => console.log(error));
 };
 
 exports.getProduct = (req, res, next) => {
@@ -85,17 +87,19 @@ exports.getOrders = (req, res, next) => {
 };
 
 exports.getIndex = (req, res, next) => {
-  Product._fetchAll((products) => {
-    res.render("shop/index", {
-      prods: products,
-      pageTitle: "Shop",
-      path: "/",
-    });
-  });
+  Product._fetchAll()
+    .then(([rows, fieldData]) => {
+      res.render("shop/product-list", {
+        prods: rows,
+        pageTitle: "Products - Shop",
+        path: "/",
+      });
+    })
+    .catch((error) => console.log(error));
 };
 
 exports.getCheckOut = (req, res, next) => {
-  res.render("shop/checkout", {
+  res.render("shop/index", {
     pageTitle: "Checkout - Shop",
     path: "/checkout",
   });
