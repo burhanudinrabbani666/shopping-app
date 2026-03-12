@@ -61,14 +61,11 @@ exports.postAddProduct = (req, res, next) => {
 
   Product.create({
     title,
-    price,
     imageUrl,
+    price,
     description,
   })
-    .then((result) => {
-      console.log(`Succesfully add Product: ${title}`);
-      res.redirect("/admin/add-product");
-    })
+    .then((result) => console.log(`${title} Succesfully Crearted`))
     .catch((error) => console.log(error));
 };
 

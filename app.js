@@ -26,7 +26,7 @@ app.use(shopRoutes);
 app.use("/", getErrorMessage);
 
 sequelize
-  .sync()
+  .sync() // Look up the model
   .then((result) => {
     // Creating Server
     app.listen(3001);
