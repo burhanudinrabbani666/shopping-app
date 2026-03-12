@@ -4,8 +4,7 @@ const sequelize = require("../utils/database");
 
 const Product = sequelize.define("product", {
   id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
+    type: DataTypes.UUID,
     allowNull: false,
     primaryKey: true,
   },
@@ -13,6 +12,8 @@ const Product = sequelize.define("product", {
   price: { type: DataTypes.DOUBLE, allowNull: false },
   imageUrl: { type: DataTypes.STRING, allowNull: false },
   description: { type: DataTypes.STRING, allowNull: false },
+  createdAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+  updatedAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
 });
 
 module.exports = Product;
