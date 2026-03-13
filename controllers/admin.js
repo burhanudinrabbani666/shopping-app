@@ -4,7 +4,7 @@ const Product = require("../models/product");
 //            Get Methode                   //
 //------------------------------------------//
 
-exports.getAddProduct = (req, res, next) => {
+exports.getAddProduct = (req, res) => {
   res.render("admin/edit-product", {
     pageTitle: "Add product - Shop",
     path: "/admin/add-product",
@@ -15,7 +15,7 @@ exports.getAddProduct = (req, res, next) => {
   });
 };
 
-exports.getEditProduct = (req, res, next) => {
+exports.getEditProduct = (req, res) => {
   const editMode = req.query.edit;
 
   if (!editMode) {
@@ -38,7 +38,7 @@ exports.getEditProduct = (req, res, next) => {
     .catch((error) => console.log(error));
 };
 
-exports.getProducts = (req, res, next) => {
+exports.getProducts = (req, res) => {
   Product.findAll()
     .then((products) => {
       res.render("admin/products", {
@@ -54,19 +54,16 @@ exports.getProducts = (req, res, next) => {
 //            Post Methode                  //
 //------------------------------------------//
 
-exports.postAddProduct = (req, res, next) => {
+exports.postAddProduct = (req, res) => {
   const title = req.body.title;
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
 
-  Product.create({
-    title,
-    imageUrl,
-    price,
-    description,
-  })
-    .then((result) => {
+  // This sequilize syntax for connecting user id to product
+  req.user
+    .createProduct({ title, imageUrl, price, description })
+    .then(() => {
       console.log(`${title} Succesfully Crearted`);
 
       res.redirect("/");
@@ -74,7 +71,7 @@ exports.postAddProduct = (req, res, next) => {
     .catch((error) => console.log(error));
 };
 
-exports.postEditProduct = (req, res, next) => {
+exports.postEditProduct = (req, res) => {
   const id = req.body.productId;
   const updatedTitle = req.body.title;
   const updatedPrice = req.body.price;
@@ -98,7 +95,7 @@ exports.postEditProduct = (req, res, next) => {
     .catch((error) => console.log(error));
 };
 
-exports.postDeleteProduct = (req, res, next) => {
+exports.postDeleteProduct = (req, res) => {
   const id = req.body.productId;
 
   Product.destroy({ where: { id } })
