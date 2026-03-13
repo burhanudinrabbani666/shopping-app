@@ -9,6 +9,7 @@ const {
   getProduct,
   postCart,
   postCartDeleteProduct,
+  postOrder,
 } = require("../controllers/shop");
 
 //-----------------------------------//
@@ -35,4 +36,5 @@ router.get("/orders", getOrders);
 
 router.post("/cart-delete-item", postCartDeleteProduct);
 
+router.post("/create-order", postOrder);
 module.exports = router;

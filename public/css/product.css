@@ -25,10 +25,11 @@
   gap: 1rem;
   align-items: center;
   max-width: 1000px;
+  margin: 0 auto;
 }
 
 .cart__item {
-  max-width: 1000px;
+  width: 1000px;
   padding: 0 1rem;
   display: flex;
   justify-content: space-between;

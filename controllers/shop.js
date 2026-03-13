@@ -139,3 +139,29 @@ exports.postCartDeleteProduct = (req, res) => {
     })
     .catch((error) => console.log(error));
 };
+
+exports.postOrder = (req, res) => {
+  req.user
+    .getCart()
+    .then((cart) => {
+      return cart.getProducts();
+    })
+    .then((products) => {
+      return req.user
+        .createOrder()
+        .then((order) => {
+          order.addProducts(
+            products.map((product) => {
+              product.order_items = { quantity: product.cart_items.quantity };
+
+              return product;
+            }),
+          );
+        })
+        .then(() => {
+          res.redirect("/orders");
+        })
+        .catch((error) => console.log(error));
+    })
+    .catch((error) => console.log(error));
+};

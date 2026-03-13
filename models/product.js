@@ -4,8 +4,8 @@ const sequelize = require("../utils/database");
 
 const Product = sequelize.define("product", {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
     allowNull: false,
     primaryKey: true, // This can use findByPk
   },
