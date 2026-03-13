@@ -7,7 +7,7 @@ const Product = sequelize.define("product", {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     allowNull: false,
-    primaryKey: true,
+    primaryKey: true, // This can use findByPk
   },
   title: DataTypes.STRING,
   price: { type: DataTypes.DOUBLE, allowNull: false },

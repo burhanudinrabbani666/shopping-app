@@ -26,7 +26,7 @@
           <textarea name="description" id="description" rows="5"><% if(editing) { %><%= product.description %><% } %></textarea>
         </div>
 
-        <!-- Hidden input for only send request ID -->
+        <!-- Hidden input for only send request ID in Edit mode -->
         <% if(editing) { %>
           <input type="hidden" value="<%= product.id %>" name="productId">  
         <%}%>
