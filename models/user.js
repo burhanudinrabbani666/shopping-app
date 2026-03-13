@@ -1,8 +1,9 @@
-# Creating a User models
+const { DataTypes } = require("sequelize");
 
-Creating Dummy schema for practice
+const sequelize = require("../utils/database");
 
-```js
+// ---------------------------------- //
+
 const User = sequelize.define("users", {
   id: {
     type: DataTypes.UUIDV4,
@@ -13,6 +14,5 @@ const User = sequelize.define("users", {
   name: DataTypes.STRING,
   email: DataTypes.STRING,
 });
-```
 
-Next: [Adding a one to many relationship](./13-adding-a-one-to-many-relationship.md)
+module.exports = User;
