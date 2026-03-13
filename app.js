@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const path = require("path");
 
 // import Routes
 const adminRoutes = require("./routes/admin");
@@ -22,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false })); // Parser for handling subm
 app.use(express.static("public")); // for serving css staticly
 app.use(express.static("images")); // for serving Image staticly
 
+// Create new Property in body to stroing users
 app.use((req, _, next) => {
   User.findByPk(1)
     .then((user) => {
