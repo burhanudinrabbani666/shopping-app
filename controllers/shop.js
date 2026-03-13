@@ -90,12 +90,45 @@ exports.getCheckOut = (req, res) => {
 //-----------------------------------//
 
 exports.postCart = (req, res) => {
-  const productId = req.body.productId;
-  Product.findById(productId, (product) => {
-    Cart.addProduct(productId, product.price);
-  });
+  const id = req.body.productId;
+  let fetchedCart;
 
-  res.redirect("/cart");
+  req.user
+    .getCart()
+    .then((cart) => {
+      fetchedCart = cart;
+
+      console.log("------------------------ Cart \n", cart);
+
+      return cart.getProducts({ where: { id } });
+    })
+    .then((products) => {
+      let product;
+
+      console.log("------------------------ Product \n", products);
+
+      if (products.length > 0) {
+        product = products[0];
+      }
+
+      let newQuantity = 1;
+
+      if (product) {
+        // .... later
+      }
+
+      return Product.findByPk(id)
+        .then((product) => {
+          return fetchedCart.addProduct(product, {
+            through: { quantity: newQuantity },
+          }); // Magic method for many to many
+        })
+        .catch((error) => console.log(error));
+    })
+    .then(() => {
+      res.redirect("/cart");
+    })
+    .catch((error) => console.log(error));
 };
 
 exports.postCartDeleteProduct = (req, res) => {
