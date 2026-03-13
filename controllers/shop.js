@@ -46,7 +46,7 @@ exports.getCart = (req, res) => {
       return cart
         .getProducts()
         .then((products) => {
-          console.log(products, "Products");
+          console.log(products);
 
           res.render("shop/cart", {
             pageTitle: "Cart - Shop",
@@ -92,42 +92,37 @@ exports.getCheckOut = (req, res) => {
 exports.postCart = (req, res) => {
   const id = req.body.productId;
   let fetchedCart;
+  let newQuantity = 1;
 
   req.user
     .getCart()
     .then((cart) => {
       fetchedCart = cart;
 
-      console.log("------------------------ Cart \n", cart);
-
       return cart.getProducts({ where: { id } });
     })
     .then((products) => {
       let product;
 
-      console.log("------------------------ Product \n", products);
-
       if (products.length > 0) {
         product = products[0];
       }
 
-      let newQuantity = 1;
-
       if (product) {
-        // .... later
+        const oldQuantity = product.cart_items.quantity; // cart_items table
+        newQuantity = oldQuantity + 1;
+
+        return product;
       }
 
-      return Product.findByPk(id)
-        .then((product) => {
-          return fetchedCart.addProduct(product, {
-            through: { quantity: newQuantity },
-          }); // Magic method for many to many
-        })
-        .catch((error) => console.log(error));
+      return Product.findByPk(id);
     })
-    .then(() => {
-      res.redirect("/cart");
+    .then((product) => {
+      return fetchedCart.addProduct(product, {
+        through: { quantity: newQuantity },
+      });
     })
+    .then(() => res.redirect("/cart"))
     .catch((error) => console.log(error));
 };
 

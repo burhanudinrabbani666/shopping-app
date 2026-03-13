@@ -222,7 +222,7 @@ img {
 
 .btn {
   display: inline-block;
-  padding: 2px 10px;
+  padding: 5px 10px;
   text-decoration: none;
   font: inherit;
   font-weight: 600;
@@ -237,6 +237,15 @@ img {
 .btn:active {
   background-color: #4f9d4d;
   color: white;
+}
+
+.danger {
+  background-color: #ff0000;
+}
+
+.danger:hover,
+.danger:active {
+  background-color: #bc0000;
 }
 
 @media (min-width: 768px) {
