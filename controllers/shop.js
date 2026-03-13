@@ -30,28 +30,33 @@ exports.getProduct = (req, res) => {
     .catch((error) => console.log(error));
 };
 
-exports.getCart = () => {
-  // Cart.getAllProducts((cart) => {
-  // Product._fetchAll((products) => {
-  //   const cartProducts = [];
-  //   for (let product of products) {
-  //     const cartProductsData = cart.products.find(
-  //       (prod) => prod.id === product.id,
-  //     );
-  //     if (cartProductsData) {
-  //       cartProducts.push({
-  //         productData: product,
-  //         qty: cartProductsData.quantity,
-  //       });
-  //     }
-  //   }
-  //   res.render("shop/cart", {
-  //     pageTitle: "Cart - Shop",
-  //     path: "/cart",
-  //     products: cartProducts,
-  //   });
-  // });
-  // });
+exports.getCart = (req, res) => {
+  req.user
+    .getCart()
+    .then((cart) => {
+      /*
+        dataValues: {
+          id: 1,
+          createdAt: 2026-03-13T04:22:19.965Z,
+          updatedAt: 2026-03-13T04:22:19.965Z,
+          userId: 1
+        },
+      */
+
+      return cart
+        .getProducts()
+        .then((products) => {
+          console.log(products, "Products");
+
+          res.render("shop/cart", {
+            pageTitle: "Cart - Shop",
+            path: "/cart",
+            products,
+          });
+        })
+        .catch((error) => console.log(error));
+    })
+    .catch((error) => console.log(error));
 };
 
 exports.getOrders = (req, res) => {
