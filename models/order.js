@@ -1,6 +1,3 @@
-# Adding an order model
-
-```js
 const { DataTypes } = require("sequelize");
 
 const sequelize = require("../utils/database");
@@ -16,10 +13,3 @@ const Order = sequelize.define("order", {
 });
 
 module.exports = Order;
-```
-
-```js
-User.hasMany(Order); // User can be have many order
-Order.belongsTo(User); // Order need User
-Order.belongsToMany(Product, { through: OrderItem }); // Order could be have many product
-```

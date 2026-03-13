@@ -40,11 +40,11 @@ exports.postCartDeleteProduct = (req, res) => {
 
 ```
 products table        cart_items table         carts table
-┌────────────┐        ┌──────────────────┐     ┌──────────┐
+┌────────────┐        ┌────────────────-──┐     ┌──────────┐
 │ id │ name  │        │ cartId │ productId│     │ id │ ... │
 │  1 │ Shirt │   ✗    │   1    │    1     │     │  1 │ ... │
 │  2 │ Shoes │        │   1    │    2     │     └──────────┘
-└────────────┘        └──────────────────┘
+└────────────┘        └─────────────-─────┘
                            ↑
                     Only this row is destroyed
 ```
