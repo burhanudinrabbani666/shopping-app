@@ -12,6 +12,8 @@ const app = express();
 const sequelize = require("./utils/database");
 const Product = require("./models/product");
 const User = require("./models/user");
+const Cart = require("./models/cart");
+const CartItem = require("./models/cart-item");
 
 // Set global value: template engine
 app.set("view engine", "ejs");
@@ -39,8 +41,19 @@ app.use(shopRoutes);
 // simply when the user entering path which not register in server this middleware catch that as a last option.
 app.use("/", getErrorMessage);
 
+// -------------------------------- //
+//            Assosiation           //
+// -------------------------------- //
+
 Product.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
+
 User.hasMany(Product);
+User.hasOne(Cart);
+
+Cart.belongsTo(User);
+Cart.belongsToMany(Product, { through: CartItem });
+
+Product.belongsToMany(Cart, { through: CartItem });
 
 sequelize
   .sync()
