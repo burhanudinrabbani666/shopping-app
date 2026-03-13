@@ -1,5 +1,4 @@
 const Product = require("../models/product");
-const Cart = require("../models/cart");
 
 //-----------------------------------//
 //           Get Methode             //
@@ -46,8 +45,6 @@ exports.getCart = (req, res) => {
       return cart
         .getProducts()
         .then((products) => {
-          console.log(products);
-
           res.render("shop/cart", {
             pageTitle: "Cart - Shop",
             path: "/cart",
@@ -128,9 +125,17 @@ exports.postCart = (req, res) => {
 
 exports.postCartDeleteProduct = (req, res) => {
   const id = req.body.productId;
-  Product.findById(id, (product) => {
-    Cart.deleteProductById(id, product.price);
-
-    res.redirect("/cart");
-  });
+  req.user
+    .getCart()
+    .then((cart) => {
+      return cart.getProducts({ where: { id } });
+    })
+    .then((products) => {
+      const product = products[0];
+      return product.cart_items.destroy();
+    })
+    .then(() => {
+      res.redirect("/cart");
+    })
+    .catch((error) => console.log(error));
 };
