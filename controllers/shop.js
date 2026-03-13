@@ -57,10 +57,18 @@ exports.getCart = (req, res) => {
 };
 
 exports.getOrders = (req, res) => {
-  res.render("shop/orders", {
-    pageTitle: "Your orders - Shop",
-    path: "/orders",
-  });
+  req.user
+    .getOrders({ include: ["products"] })
+    .then((orders) => {
+      console.log(orders);
+
+      res.render("shop/orders", {
+        pageTitle: "Your orders - Shop",
+        path: "/orders",
+        orders,
+      });
+    })
+    .catch((error) => console.log(error));
 };
 
 exports.getIndex = (req, res) => {
@@ -141,9 +149,12 @@ exports.postCartDeleteProduct = (req, res) => {
 };
 
 exports.postOrder = (req, res) => {
+  let fetchCart;
+
   req.user
     .getCart()
     .then((cart) => {
+      fetchCart = cart;
       return cart.getProducts();
     })
     .then((products) => {
@@ -157,6 +168,9 @@ exports.postOrder = (req, res) => {
               return product;
             }),
           );
+        })
+        .then(() => {
+          return fetchCart.setProducts(null); // Clean Products in Cart
         })
         .then(() => {
           res.redirect("/orders");
