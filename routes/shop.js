@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 const {
   getProducts,
-  getCart,
   getIndex,
-  getCheckOut,
-  getOrders,
-  getProduct,
-  postCart,
+  // getCart,
+  // getCheckOut,
+  // getOrders,
+  // getProduct,
+  // postCart,
   postCartDeleteProduct,
   postOrder,
 } = require("../controllers/shop");
@@ -20,15 +20,15 @@ router.get("/", getIndex);
 
 router.get("/products", getProducts);
 
-router.get("/products/:productId", getProduct);
+// router.get("/products/:productId", getProduct);
 
-router.get("/cart", getCart);
+// router.get("/cart", getCart);
 
-router.post("/cart", postCart);
+// router.post("/cart", postCart);
 
-router.get("/checkout", getCheckOut);
+// router.get("/checkout", getCheckOut);
 
-router.get("/orders", getOrders);
+// router.get("/orders", getOrders);
 
 //-----------------------------------//
 //          Post Methode             //

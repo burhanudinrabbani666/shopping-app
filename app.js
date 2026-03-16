@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 
 // import Routes
 const adminRoutes = require("./routes/admin");
-// const shopRoutes = require("./routes/shop");
+const shopRoutes = require("./routes/shop");
 const { getErrorMessage } = require("./controllers/404");
 
 // MongoDB CLient
@@ -21,7 +21,7 @@ app.use(express.static("images")); // for serving Image staticly
 
 // Middleware
 app.use("/admin", adminRoutes);
-// app.use(shopRoutes);
+app.use(shopRoutes);
 
 // simply when the user entering path which not register in server this middleware catch that as a last option.
 app.use("/", getErrorMessage);
