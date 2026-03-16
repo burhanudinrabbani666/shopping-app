@@ -42,11 +42,10 @@ exports.getEditProduct = (req, res) => {
 };
 
 exports.getProducts = (req, res) => {
-  req.user
-    .getProducts()
+  Product.fetchALl()
     .then((products) => {
       res.render("admin/products", {
-        prods: products,
+        products,
         pageTitle: "Admin Product- Shop",
         path: "/admin/products",
       });

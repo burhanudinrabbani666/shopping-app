@@ -6,17 +6,16 @@ const {
   // getEditProduct,
   // postEditProduct,
   // postDeleteProduct,
-  // getProducts,
+  getProducts,
 } = require("../controllers/admin");
 
-router.post("/add-product", postAddProduct);
-router.get("/add-product", getAddProduct);
-
 // // /admin => GET
-// router.get("/products", getProducts);
+router.get("/products", getProducts);
+router.get("/add-product", getAddProduct);
 // router.get("/edit-product/:productId", getEditProduct);
 
 // // /admin => POST
+router.post("/add-product", postAddProduct);
 // router.post("/edit-product", postEditProduct);
 // router.post("/delete-product", postDeleteProduct);
 
