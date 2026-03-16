@@ -64,15 +64,15 @@ exports.postAddProduct = (req, res) => {
   const price = req.body.price;
   const description = req.body.description;
 
-  // This sequilize syntax for connecting user id to product
-  req.user
-    .createProduct({ title, imageUrl, price, description })
-    .then(() => {
-      console.log(`${title} Succesfully Crearted`);
+  const product = new Product(title, price, description, imageUrl);
 
-      res.redirect("/");
+  product
+    .save()
+    .then(() => {
+      console.log("Created Product");
+      res.redirect("/admin/products");
     })
-    .catch((error) => console.log(error));
+    .catch();
 };
 
 exports.postEditProduct = (req, res) => {
