@@ -5,7 +5,7 @@ const {
   getIndex,
   getCart,
   // getCheckOut,
-  // getOrders,
+  getOrders,
   getProduct,
   postCart,
   postCartDeleteProduct,
@@ -26,7 +26,7 @@ router.get("/cart", getCart);
 
 // router.get("/checkout", getCheckOut);
 
-// router.get("/orders", getOrders);
+router.get("/orders", getOrders);
 
 //-----------------------------------//
 //          Post Methode             //
