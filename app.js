@@ -21,10 +21,10 @@ app.use(bodyParser.urlencoded({ extended: false })); // Parser for handling subm
 app.use(express.static("public")); // for serving css staticly
 app.use(express.static("images")); // for serving Image staticly
 
-app.use((req, res, next) => {
+app.use((req, _, next) => {
   return User.findUserById("69b8c1e3b387ed269d055ffd")
     .then((user) => {
-      req.user = user;
+      req.user = new User(user.username, user.name, user.cart, user._id);
 
       next();
     })

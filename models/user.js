@@ -22,7 +22,9 @@ class User {
   addToCart(product) {
     const db = getDB();
 
-    const updatedCart = { items: [{ ...product, quatity: 1 }] };
+    const updatedCart = {
+      items: [{ productId: new ObjectId(product._id), quantity: 1 }],
+    };
 
     return db
       .collection("users")
