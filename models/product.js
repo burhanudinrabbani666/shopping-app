@@ -2,19 +2,30 @@ const { ObjectId } = require("mongodb");
 const { getDB } = require("../utils/database");
 
 class Product {
-  constructor(title, price, description, imageUrl) {
+  constructor(title, price, description, imageUrl, id) {
     this.title = title;
     this.price = price;
     this.description = description;
     this.imageUrl = imageUrl;
+    this._id = new ObjectId(id);
   }
 
   save() {
     const db = getDB();
+    let dbOp;
 
-    return db
-      .collection("products")
-      .insertOne(this)
+    if (this._id) {
+      // Update the Product
+      dbOp = db
+        .collection("products")
+        .updateOne({ _id: this._id }, { $set: this }); // Update value in database
+
+      //
+    } else {
+      dbOp = db.collection("products").insertOne(this);
+    }
+
+    return dbOp
       .then((result) => {
         console.log(result);
       })
@@ -56,21 +67,19 @@ class Product {
       })
       .catch((error) => console.log(error));
   }
-}
 
-// const Product = sequelize.define("product", {
-//   id: {
-//     type: DataTypes.INTEGER,
-//     autoIncrement: true,
-//     allowNull: false,
-//     primaryKey: true, // This can use findByPk
-//   },
-//   title: DataTypes.STRING,
-//   price: { type: DataTypes.DOUBLE, allowNull: false },
-//   imageUrl: { type: DataTypes.STRING, allowNull: false },
-//   description: { type: DataTypes.STRING, allowNull: false },
-//   createdAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
-//   updatedAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
-// });
+  static deleteById(id) {
+    const db = getDB();
+
+    db.collection("products")
+      .deleteOne({ _id: new ObjectId(id) })
+      .then(() => {
+        console.log("Deleted");
+
+        return;
+      })
+      .catch((error) => console.log(error));
+  }
+}
 
 module.exports = Product;

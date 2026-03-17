@@ -24,11 +24,8 @@ exports.getEditProduct = (req, res) => {
 
   const productId = req.params.productId;
 
-  req.user
-    .getProducts({ where: { id: productId } })
-    .then((products) => {
-      const product = products[0];
-
+  Product.findById(productId)
+    .then((product) => {
       if (!product) return res.redirect("/");
 
       res.render("admin/edit-product", {
@@ -81,18 +78,18 @@ exports.postEditProduct = (req, res) => {
   const updatedImageUrl = req.body.imageUrl;
   const updatedDesc = req.body.description;
 
-  Product.findByPk(id)
-    .then((product) => {
-      // Edit
-      product.title = updatedTitle;
-      product.price = updatedPrice;
-      product.imageUrl = updatedImageUrl;
-      product.description = updatedDesc;
+  const updateProduct = new Product(
+    updatedTitle,
+    updatedPrice,
+    updatedDesc,
+    updatedImageUrl,
+    id,
+  );
 
-      return product.save(); // Save Back in Database (Overwrite)
-    })
+  updateProduct
+    .save()
     .then(() => {
-      console.log("Updated Product");
+      console.log("Updated Product!");
       res.redirect("/admin/products");
     })
     .catch((error) => console.log(error));
@@ -101,7 +98,7 @@ exports.postEditProduct = (req, res) => {
 exports.postDeleteProduct = (req, res) => {
   const id = req.body.productId;
 
-  Product.destroy({ where: { id } })
+  Product.deleteById(id)
     .then(() => {
       console.log("Delete Product");
       res.redirect("/admin/products");
