@@ -1,5 +1,8 @@
 const { ObjectId } = require("mongodb");
 const { getDB } = require("../utils/database");
+const {
+  RelationshipType,
+} = require("sequelize/lib/errors/database/foreign-key-constraint-error");
 
 class User {
   constructor(username, email, cart, id) {
@@ -92,9 +95,18 @@ class User {
   addOrder() {
     const db = getDB();
 
-    return db
-      .collection("orders")
-      .insertOne(this.cart)
+    return this.getCart()
+      .then((products) => {
+        const order = {
+          items: products,
+          user: {
+            _id: new ObjectId(this._id),
+            username: this.username,
+          },
+        };
+
+        return db.collection("orders").insertOne(order);
+      })
       .then(() => {
         this.cart = { items: [] };
 
@@ -106,6 +118,16 @@ class User {
             { $set: { cart: { items: [] } } },
           );
       })
+      .catch((error) => console.log(error));
+  }
+
+  getOrders() {
+    const db = getDB();
+
+    return db
+      .collection("orders")
+      .find()
+      .then()
       .catch((error) => console.log(error));
   }
 
