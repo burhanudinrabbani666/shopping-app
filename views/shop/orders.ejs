@@ -11,14 +11,14 @@
       <% if(orders.lengthb <= 0){ %>
         <h1>Order</h1>
       <% } else { %>
-        <ul>
+        <ul class="orders__container">
           <% orders.forEach(order=> { %>
-            <li>
-              <h1># <%= order.id %></h1>
+            <li class="order__list">
+              <h1 class="order__heading">Order - # <%= order._id %></h1>
 
-              <ul>
-                <% order.products.forEach(product=> { %>
-                  <li><%= product.title %> (<%= product.quantity %>)</li>
+              <ul class="order__container-item">
+                <% order.items.forEach(item=> { %>
+                  <li class="order__item"><%= item.title %> (<%= item.quantity %>)</li>
                 <% }) %>  
               </ul>
             
