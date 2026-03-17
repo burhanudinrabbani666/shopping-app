@@ -32,26 +32,12 @@ exports.getProduct = (req, res) => {
 exports.getCart = (req, res) => {
   req.user
     .getCart()
-    .then((cart) => {
-      /*
-        dataValues: {
-          id: 1,
-          createdAt: 2026-03-13T04:22:19.965Z,
-          updatedAt: 2026-03-13T04:22:19.965Z,
-          userId: 1
-        },
-      */
-
-      return cart
-        .getProducts()
-        .then((products) => {
-          res.render("shop/cart", {
-            pageTitle: "Cart - Shop",
-            path: "/cart",
-            products,
-          });
-        })
-        .catch((error) => console.log(error));
+    .then((products) => {
+      res.render("shop/cart", {
+        pageTitle: "Cart - Shop",
+        path: "/cart",
+        products,
+      });
     })
     .catch((error) => console.log(error));
 };
