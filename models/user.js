@@ -2,9 +2,11 @@ const { ObjectId } = require("mongodb");
 const { getDB } = require("../utils/database");
 
 class User {
-  constructor(username, email) {
+  constructor(username, email, cart, id) {
     this.username = username;
     this.email = email;
+    this.cart = cart; // {items: []}
+    this._id = id;
   }
 
   save() {
@@ -15,6 +17,19 @@ class User {
       .insertOne(this)
       .then(() => console.log("Success Creted User!"))
       .catch((error) => console.log(error));
+  }
+
+  addToCart(product) {
+    const db = getDB();
+
+    const updatedCart = { items: [{ ...product, quatity: 1 }] };
+
+    return db
+      .collection("users")
+      .updateOne(
+        { _id: new ObjectId(this._id) },
+        { $set: { cart: updatedCart } },
+      );
   }
 
   static findUserById(id) {
