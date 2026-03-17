@@ -100,7 +100,6 @@ exports.postDeleteProduct = (req, res) => {
 
   Product.deleteById(id)
     .then(() => {
-      console.log("Delete Product");
       res.redirect("/admin/products");
     })
     .catch((error) => console.log(error));
