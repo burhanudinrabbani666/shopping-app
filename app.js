@@ -22,7 +22,7 @@ app.use(express.static("public")); // for serving css staticly
 app.use(express.static("images")); // for serving Image staticly
 
 app.use((req, res, next) => {
-  User.findUserById("69b8c1e3b387ed269d055ffd")
+  return User.findUserById("69b8c1e3b387ed269d055ffd")
     .then((user) => {
       req.user = user;
 

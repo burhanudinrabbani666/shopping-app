@@ -23,6 +23,7 @@ class User {
     return db
       .collection("users")
       .find({ _id: new ObjectId(id) })
+      .next()
       .then((user) => {
         return user;
       })
