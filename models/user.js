@@ -65,12 +65,28 @@ class User {
             quantity: this.cart.items.find((item) => {
               return item.productId.toString() == product._id.toString();
             }).quantity,
+            _id: product._id.toString(),
           };
         });
 
         return productToRender;
       })
       .catch((error) => console.log(error));
+  }
+
+  deleteItemsFromCart(id) {
+    const updatedCartItems = this.cart.items.filter(
+      (item) => item.productId.toString() !== id,
+    );
+
+    // Set to database again
+    const db = getDB();
+    return db
+      .collection("users")
+      .updateOne(
+        { _id: new ObjectId(this._id) },
+        { $set: { cart: { items: updatedCartItems } } },
+      );
   }
 
   static findUserById(id) {

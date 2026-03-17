@@ -24,7 +24,7 @@ app.use(express.static("images")); // for serving Image staticly
 app.use((req, _, next) => {
   return User.findUserById("69b8c1e3b387ed269d055ffd")
     .then((user) => {
-      req.user = new User(user.username, user.name, user.cart, user._id);
+      req.user = new User(user.username, user.email, user.cart, user._id);
 
       next();
     })

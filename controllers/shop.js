@@ -86,57 +86,15 @@ exports.postCart = (req, res) => {
     .then((product) => {
       return req.user.addToCart(product);
     })
-    .then((result) => console.log(result))
-    .catch((error) => console.log(error));
-
-  /*
-  let fetchedCart;
-  let newQuantity = 1;
-  
-  req.user
-  .getCart()
-  .then((cart) => {
-    fetchedCart = cart;
-    
-    return cart.getProducts({ where: { id } });
-  })
-  .then((products) => {
-    let product;
-    
-    if (products.length > 0) {
-      product = products[0];
-      }
-      
-      if (product) {
-        const oldQuantity = product.cart_items.quantity; // cart_items table
-        newQuantity = oldQuantity + 1;
-        
-        return product;
-      }
-      
-      return Product.findByPk(id);
-    })
-    .then((product) => {
-      return fetchedCart.addProduct(product, {
-        through: { quantity: newQuantity },
-      });
-    })
     .then(() => res.redirect("/cart"))
     .catch((error) => console.log(error));
-    */
 };
 
 exports.postCartDeleteProduct = (req, res) => {
   const id = req.body.productId;
+
   req.user
-    .getCart()
-    .then((cart) => {
-      return cart.getProducts({ where: { id } });
-    })
-    .then((products) => {
-      const product = products[0];
-      return product.cart_items.destroy();
-    })
+    .deleteItemsFromCart(id)
     .then(() => {
       res.redirect("/cart");
     })
