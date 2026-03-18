@@ -5,8 +5,12 @@ const Product = require("../models/product");
 //-----------------------------------//
 
 exports.getProducts = (req, res) => {
-  Product.fetchALl()
-    .then((products) => {
+  Product.find()
+    .then((productsData) => {
+      const products = productsData.map((product) => {
+        return { ...product._doc, _id: product._id.toString() };
+      });
+
       res.render("shop/product-list", {
         prods: products,
         pageTitle: "Products - Shop",
@@ -18,12 +22,17 @@ exports.getProducts = (req, res) => {
 
 exports.getProduct = (req, res) => {
   const productId = req.params.productId;
+
   Product.findById(productId)
-    .then((product) => {
+    .then((productData) => {
+      if (!productData) return res.redirect("/");
+
+      const product = { ...productData._doc, _id: productData._id.toString() };
+
       res.render("shop/product-detail", {
-        product: product,
+        product,
         pageTitle: `Shop - ${product.title}`,
-        path: "/products",
+        path: null,
       });
     })
     .catch((error) => console.log(error));
@@ -56,8 +65,12 @@ exports.getOrders = (req, res) => {
 };
 
 exports.getIndex = (_, res) => {
-  Product.fetchALl()
-    .then((products) => {
+  Product.find()
+    .then((productsData) => {
+      const products = productsData.map((product) => {
+        return { ...product._doc, _id: product._id.toString() };
+      });
+
       res.render("shop/product-list", {
         prods: products,
         pageTitle: "Products - Shop",
