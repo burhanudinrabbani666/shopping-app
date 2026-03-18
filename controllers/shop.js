@@ -12,7 +12,7 @@ exports.getProducts = (req, res) => {
       });
 
       res.render("shop/product-list", {
-        prods: products,
+        products,
         pageTitle: "Products - Shop",
         path: "/products",
       });
@@ -72,7 +72,7 @@ exports.getIndex = (_, res) => {
       });
 
       res.render("shop/product-list", {
-        prods: products,
+        products,
         pageTitle: "Products - Shop",
         path: "/",
       });

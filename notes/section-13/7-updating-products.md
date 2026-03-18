@@ -43,8 +43,7 @@ exports.postEditProduct = (req, res) => {
 
 ## Important Notes
 
-- `updateOne()` does not return the updated document; it returns a result summary.
-- Mongoose will cast the `id` string to an ObjectId automatically.
+- `updateOne()` does not return the updated document; it returns a result summary.- Mongoose will cast the `id` string to an ObjectId automatically.
 - If your schema uses `timestamps: true`, you can remove the manual `updatedAt`.
 
 ## Benefits
