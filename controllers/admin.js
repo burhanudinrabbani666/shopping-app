@@ -39,8 +39,10 @@ exports.getEditProduct = (req, res) => {
 };
 
 exports.getProducts = (req, res) => {
-  Product.fetchALl()
+  Product.find()
     .then((products) => {
+      console.log(products);
+
       res.render("admin/products", {
         products,
         pageTitle: "Admin Product- Shop",

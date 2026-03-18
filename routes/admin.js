@@ -10,7 +10,7 @@ const {
 } = require("../controllers/admin");
 
 // /admin => GET
-// router.get("/products", getProducts);
+router.get("/products", getProducts);
 router.get("/add-product", getAddProduct);
 // router.get("/edit-product/:productId", getEditProduct);
 
