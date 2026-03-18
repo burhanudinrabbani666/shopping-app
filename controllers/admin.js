@@ -42,8 +42,6 @@ exports.getEditProduct = (req, res) => {
 
 exports.getProducts = (req, res) => {
   Product.find()
-    // .select("ti")
-    // .populate("userId") // This make get all data of userId
     .then((productsData) => {
       const products = productsData.map((product) => {
         return {
