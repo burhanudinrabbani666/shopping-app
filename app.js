@@ -10,7 +10,7 @@ const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 const { getErrorMessage } = require("./controllers/404");
 
-// const User = require("./models/user");
+const User = require("./models/user");
 
 const app = express();
 
@@ -22,15 +22,15 @@ app.use(bodyParser.urlencoded({ extended: false })); // Parser for handling subm
 app.use(express.static("public")); // for serving css staticly
 app.use(express.static("images")); // for serving Image staticly
 
-// app.use((req, _, next) => {
-//   return User.findUserById("69b8c1e3b387ed269d055ffd")
-//     .then((user) => {
-//       req.user = new User(user.username, user.email, user.cart, user._id);
+app.use((req, _, next) => {
+  return User.findById("69ba49bdb77dc36c2e333501")
+    .then((user) => {
+      req.user = user;
 
-//       next();
-//     })
-//     .catch((error) => console.log(error));
-// });
+      next();
+    })
+    .catch((error) => console.log(error));
+});
 
 // Middleware
 app.use("/admin", adminRoutes);
@@ -43,7 +43,19 @@ app.use("/", getErrorMessage);
 mongoose
   .connect(process.env.MONGO_DB_URL)
   .then(() => {
-    console.log("Connected");
+    User.findOne().then((user) => {
+      console.log(user);
+
+      if (!user) {
+        const user = new User({
+          name: "bani",
+          email: "bani@example.io",
+          cart: { items: [] },
+        });
+
+        user.save();
+      }
+    });
 
     app.listen(3001);
   })
