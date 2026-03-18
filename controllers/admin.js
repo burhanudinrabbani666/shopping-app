@@ -42,16 +42,17 @@ exports.getEditProduct = (req, res) => {
 
 exports.getProducts = (req, res) => {
   Product.find()
+    // .select("ti")
+    // .populate("userId") // This make get all data of userId
     .then((productsData) => {
       const products = productsData.map((product) => {
         return {
-          title: product.title,
-          price: product.price,
-          description: product.description,
-          imageUrl: product.imageUrl,
+          ...product._doc,
           _id: product._id.toString(),
         };
       });
+
+      console.log(products);
 
       res.render("admin/products", {
         products,
@@ -72,7 +73,13 @@ exports.postAddProduct = (req, res) => {
   const price = req.body.price;
   const description = req.body.description;
 
-  const product = new Product({ title, price, description, imageUrl });
+  const product = new Product({
+    title,
+    price,
+    description,
+    imageUrl,
+    userId: req.user,
+  });
 
   product
     .save()

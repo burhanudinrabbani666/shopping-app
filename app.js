@@ -23,7 +23,7 @@ app.use(express.static("public")); // for serving css staticly
 app.use(express.static("images")); // for serving Image staticly
 
 app.use((req, _, next) => {
-  return User.findById("69ba49bdb77dc36c2e333501")
+  return User.findById("69ba4b1eba6c3a96bb28f65d")
     .then((user) => {
       req.user = user;
 
@@ -44,8 +44,6 @@ mongoose
   .connect(process.env.MONGO_DB_URL)
   .then(() => {
     User.findOne().then((user) => {
-      console.log(user);
-
       if (!user) {
         const user = new User({
           name: "bani",

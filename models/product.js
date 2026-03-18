@@ -8,6 +8,7 @@ const productSchema = new Schema({
   imageUrl: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
+  userId: { type: Schema.Types.ObjectId, ref: "user" }, // Reference
 });
 
 module.exports = mongoose.model("Product", productSchema);
