@@ -1,15 +1,3 @@
-const mongoose = require("mongoose");
-const { Schema } = mongoose;
-
-const productSchema = new Schema({
-  title: { type: String, require: true },
-  price: { type: Number, require: true },
-  description: { type: String, require: true },
-  imageUrl: { type: String, require: true },
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
-});
-
 /*
 // const { ObjectId } = require("mongodb");
 // const { getDB } = require("../utils/database");
