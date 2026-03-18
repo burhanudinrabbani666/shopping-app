@@ -22,4 +22,4 @@ exports.getProduct = (req, res) => {
 };
 ```
 
-Next: [Updating products](./7-updating-products.md)
+Next: [Updating products] (./7-updating-products.md)
